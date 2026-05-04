@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Praktik Kelas 9 | SMP ABBS Surakarta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f7fe; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeUp 0.5s ease-out forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .nav-glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
+        
+        .group-card {
+            transition: all 0.2s ease;
+        }
+        .group-card:hover {
+            transform: translateY(-3px);
+        }
+        .schedule-table-wrapper {
+            overflow-x: auto;
+            border-radius: 1rem;
+        }
+        .schedule-table {
+            min-width: 800px;
+        }
+        th, td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-28">
+
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 nav-glass rounded-full shadow-xl px-8 py-4 flex space-x-10 z-50">
+        <button onclick="openTab('beranda')" class="nav-btn group flex flex-col items-center text-blue-600 transition-all" id="btn-beranda">
+            <i class="fas fa-layer-group text-2xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Dashboard</span>
+        </button>
+        <button onclick="openTab('jadwal')" class="nav-btn group flex flex-col items-center text-slate-400 hover:text-blue-600 transition-all" id="btn-jadwal">
+            <i class="fas fa-calendar-alt text-2xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Jadwal</span>
+        </button>
+        <button onclick="openTab('kelompok')" class="nav-btn group flex flex-col items-center text-slate-400 hover:text-blue-600 transition-all" id="btn-kelompok">
+            <i class="fas fa-users text-2xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Kelompok</span>
+        </button>
+        <button onclick="openTab('panduan')" class="nav-btn group flex flex-col items-center text-slate-400 hover:text-blue-600 transition-all" id="btn-panduan">
+            <i class="fas fa-book-open text-2xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Panduan</span>
+        </button>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-5 pt-8">
+
+        <!-- ==================== BERANDA / DASHBOARD ==================== -->
+        <section id="beranda" class="tab-content active">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <p class="text-slate-500 font-medium text-sm mb-1"><i class="far fa-calendar text-blue-500 mr-2"></i>18 - 23 Mei 2026</p>
+                    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Ujian Praktik Kelas 9</h1>
+                    <p class="text-slate-500 text-sm mt-1">SMP Islam ABBS Surakarta</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shadow-sm border border-blue-200">
+                    <i class="fas fa-school text-xl"></i>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-3xl p-8 mb-6 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-blue-600">
+                <div class="relative z-10 text-white md:w-2/3">
+                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-white/30">Tahun Ajaran 2025/2026</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">Siap Hadapi<br>Ujian Praktik!</h2>
+                    <p class="text-blue-100 text-sm leading-relaxed max-w-md">Perhatikan jadwal dengan teliti, temukan kelompokmu, dan pelajari instruksi ujian agar mendapatkan nilai maksimal. Kerjakan dengan jujur dan percaya diri.</p>
+                </div>
+                <div class="relative z-10 md:w-1/3 flex justify-end mt-6 md:mt-0">
+                    <i class="fas fa-graduation-cap text-8xl text-white/90 drop-shadow-lg transform rotate-12"></i>
+                </div>
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                <div class="absolute bottom-0 left-0 w-40 h-40 bg-blue-400 opacity-20 rounded-full blur-2xl -ml-10 -mb-10"></div>
+            </div>
+
+            <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-100 shadow-sm mb-8 relative overflow-hidden">
+                <i class="fas fa-quote-left text-5xl text-emerald-100 absolute -top-2 -left-2 z-0"></i>
+                <div class="relative z-10 pl-4 text-center">
+                    <p class="text-emerald-800 font-semibold italic text-lg leading-relaxed mb-3">"Barangsiapa yang menempuh suatu jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga."</p>
+                    <p class="text-sm font-bold text-emerald-600 uppercase tracking-widest">(HR. Muslim)</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600"><i class="fas fa-book text-xl"></i></div>
+                    <div><h4 class="text-2xl font-black text-slate-800">11</h4><p class="text-xs font-bold text-slate-400 uppercase">Mapel</p></div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600"><i class="fas fa-clock text-xl"></i></div>
+                    <div><h4 class="text-2xl font-black text-slate-800">6</h4><p class="text-xs font-bold text-slate-400 uppercase">Hari Ujian</p></div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600"><i class="fas fa-door-open text-xl"></i></div>
+                    <div><h4 class="text-2xl font-black text-slate-800">6</h4><p class="text-xs font-bold text-slate-400 uppercase">Ruang</p></div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-600"><i class="fas fa-user-friends text-xl"></i></div>
+                    <div><h4 class="text-xl font-black text-slate-800">2 Sesi</h4><p class="text-xs font-bold text-slate-400 uppercase">Per Hari</p></div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-5 shadow-sm">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-exclamation-triangle text-yellow-600 text-xl mt-0.5"></i>
+                    <div>
+                        <h4 class="font-bold text-yellow-800">📌 Aturan Penting Ujian Praktik</h4>
+                        <ul class="text-xs text-yellow-700 space-y-1.5 mt-2 list-disc pl-4">
+                            <li>🚪 <span class="font-semibold">Kehadiran:</span> Siswa masuk hanya ketika jam ujian praktik saja. Sesi 1 kepulangan setelah mengambil MBG, sesi 2 setelah Dzuhur.</li>
+                            <li>👥 <span class="font-semibold">Pembagian Kelas:</span> Setiap kelas dibagi menjadi 2 kelompok besar (contoh: 9A 1 dan 9A 2) berdasarkan jadwal.</li>
+                            <li>✍️ <span class="font-semibold">Ujian Individu:</span> Seluruh siswa dalam kelompok besar mengikuti ujian mandiri (tanpa diskusi).</li>
+                            <li>🤝 <span class="font-semibold">Ujian Kelompok:</span> Gunakan pembagian kelompok kecil di tab <span class="font-mono bg-yellow-100 px-1 rounded">"Kelompok"</span> (kelompok kecil bersifat tetap untuk semua mapel yang diujikan secara berkelompok).</li>
+                            <li>📵 <span class="font-semibold">Larangan:</span> Dilarang membawa kalkulator untuk ujian Matematika. Bawa alat sesuai kebutuhan tiap mapel.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== JADWAL ==================== -->
+        <section id="jadwal" class="tab-content">
+            <div class="mb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">📅 Jadwal Ujian</h2>
+                <p class="text-slate-500 text-sm">Geser tabel ke kanan untuk melihat jam ujian secara penuh. Waktu setiap sesi: 50 menit (kecuali Jumat & Sabtu).</p>
+            </div>
+            <div id="jadwal-container" class="space-y-6"></div>
+        </section>
+
+        <!-- ==================== KELOMPOK ==================== -->
+        <section id="kelompok" class="tab-content">
+            <div class="mb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">👥 Daftar Kelompok</h2>
+                    <p class="text-slate-500 text-sm">Pilih kelasmu untuk melihat teman sekelompok kecil. Kelompok ini berlaku tetap untuk semua mata pelajaran yang diujikan secara berkelompok.</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="searchBox" placeholder="Cari namamu..." class="w-full bg-white border border-slate-200 text-sm rounded-full py-2.5 pl-10 pr-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 shadow-sm transition-all" onkeyup="cariSiswa()">
+                    <i class="fas fa-search absolute left-4 top-3 text-slate-400"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl p-4 shadow-sm">
+                    <h3 class="font-bold text-indigo-800 flex items-center gap-2 mb-2"><i class="fas fa-users"></i> Ujian Kelompok</h3>
+                    <p class="text-sm text-indigo-700 leading-relaxed">Mata pelajaran yang dikerjakan secara berkelompok (sesuai kelompok kecil di bawah):</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">Matematika</span>
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">IFE (PAI)</span>
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">Bahasa Indonesia (Debat)</span>
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">Pendidikan Pancasila (Memasak)</span>
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">Bahasa Inggris*</span>
+                        <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">IPS* (Tergantung pilihan)</span>
+                    </div>
+                    <p class="text-xs text-indigo-600 mt-2">*) Beberapa sesi dapat dipilih bentuk kelompok/individu. Detail cek panduan.</p>
+                </div>
+                <div class="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-xl p-4 shadow-sm">
+                    <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2"><i class="fas fa-user"></i> Ujian Individu</h3>
+                    <p class="text-sm text-emerald-700 leading-relaxed">Mata pelajaran yang dikerjakan secara mandiri (tanpa kelompok kecil):</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">IPA</span>
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">IPS (Terintegrasi)</span>
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">Al-Qur'an</span>
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">Bahasa Jawa</span>
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">PJOK (Bleep Test)</span>
+                        <span class="bg-emerald-200 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">ICT (Progul & Non Progul)</span>
+                    </div>
+                    <p class="text-xs text-emerald-600 mt-2">Seluruh siswa dalam kelompok besar (9X 1 / 9X 2) wajib mengikuti ujian mandiri sesuai jadwal.</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-6 text-center text-blue-700 text-sm flex items-center justify-center gap-2">
+                <i class="fas fa-check-circle"></i> <span class="font-medium">Kelompok kecil di bawah ini bersifat SAMA untuk semua mapel yang diujikan secara kelompok.</span> (Matematika, IFE, B.Indonesia, PKn, dll)
+            </div>
+
+            <div class="flex space-x-2 overflow-x-auto hide-scroll pb-4 mb-2 border-b border-slate-200" id="filter-kelas-container"></div>
+            <div id="grid-kelompok" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4"></div>
+        </section>
+
+        <!-- ==================== PANDUAN ==================== -->
+        <section id="panduan" class="tab-content">
+            <div class="mb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">📖 Instruksi & Konten Ujian</h2>
+                <p class="text-slate-500 text-sm">Pelajari detail aktivitas praktik, bentuk ujian, dan alat yang harus dibawa.</p>
+            </div>
+            <div id="panduan-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <script>
+        // ==================== DATA JADWAL LENGKAP (Ruang & Mapel dipisah) ====================
+        const dataJadwal = [
+            { 
+                hari: "Senin, 18 Mei 2026", color: "blue", 
+                sesi: ["07:30 - 08:20", "08:30 - 09:20", "09:30 - 10:20", "10:30 - 11:20"],
+                rows: [
+                    { ruang: "R 1", mapel: "IPA", c1: "9A 1", c2: "9D 1", c3: "9A 2", c4: "9D 2" },
+                    { ruang: "R 2", mapel: "IPA", c1: "9B 1", c2: "9E 1", c3: "9B 2", c4: "9E 2" },
+                    { ruang: "R 3", mapel: "IPA", c1: "9C 1", c2: "9F 1", c3: "9C 2", c4: "9F 2" },
+                    { ruang: "R 4", mapel: "IPS", c1: "9D 1", c2: "9A 1", c3: "9D 2", c4: "9A 2" },
+                    { ruang: "R 5", mapel: "IPS", c1: "9E 1", c2: "9B 1", c3: "9E 2", c4: "9B 2" },
+                    { ruang: "R 6", mapel: "IPS", c1: "9F 1", c2: "9C 1", c3: "9F 2", c4: "9C 2" }
+                ]
+            },
+            { 
+                hari: "Selasa, 19 Mei 2026", color: "indigo", 
+                sesi: ["07:30 - 08:20", "08:30 - 09:20", "09:30 - 10:20", "10:30 - 11:20"],
+                rows: [
+                    { ruang: "R 1", mapel: "Matematika", c1: "9A 1", c2: "9D 1", c3: "9A 2", c4: "9D 2" },
+                    { ruang: "R 2", mapel: "Matematika", c1: "9B 1", c2: "9E 1", c3: "9B 2", c4: "9E 2" },
+                    { ruang: "R 3", mapel: "Matematika", c1: "9C 1", c2: "9F 1", c3: "9C 2", c4: "9F 2" },
+                    { ruang: "R 4", mapel: "IFE (PAI)", c1: "9D 1", c2: "9A 1", c3: "9D 2", c4: "9A 2" },
+                    { ruang: "R 5", mapel: "IFE (PAI)", c1: "9E 1", c2: "9B 1", c3: "9E 2", c4: "9B 2" },
+                    { ruang: "R 6", mapel: "IFE (PAI)", c1: "9F 1", c2: "9C 1", c3: "9F 2", c4: "9C 2" }
+                ]
+            },
+            { 
+                hari: "Rabu, 20 Mei 2026", color: "cyan", 
+                sesi: ["07:30 - 08:20", "08:30 - 09:20", "09:30 - 10:20", "10:30 - 11:20"],
+                rows: [
+                    { ruang: "R 1", mapel: "Bahasa Inggris", c1: "9A 1", c2: "9D 1", c3: "9A 2", c4: "9D 2" },
+                    { ruang: "R 2", mapel: "Bahasa Inggris", c1: "9B 1", c2: "9E 1", c3: "9B 2", c4: "9E 2" },
+                    { ruang: "R 3", mapel: "Bahasa Inggris", c1: "9C 1", c2: "9F 1", c3: "9C 2", c4: "9F 2" },
+                    { ruang: "R 4", mapel: "Pend. Pancasila", c1: "9D 1", c2: "9A 1", c3: "9D 2", c4: "9A 2" },
+                    { ruang: "R 5", mapel: "Pend. Pancasila", c1: "9E 1", c2: "9B 1", c3: "9E 2", c4: "9B 2" },
+                    { ruang: "R 6", mapel: "Pend. Pancasila", c1: "9F 1", c2: "9C 1", c3: "9F 2", c4: "9C 2" }
+                ]
+            },
+            { 
+                hari: "Kamis, 21 Mei 2026", color: "emerald", 
+                sesi: ["07:30 - 08:20", "08:30 - 09:20", "09:30 - 10:20", "10:30 - 11:20"],
+                rows: [
+                    { ruang: "R 1", mapel: "Bahasa Jawa", c1: "9A 1", c2: "9D 1", c3: "9A 2", c4: "9D 2" },
+                    { ruang: "R 2", mapel: "Bahasa Jawa", c1: "9B 1", c2: "9E 1", c3: "9B 2", c4: "9E 2" },
+                    { ruang: "R 3", mapel: "Bahasa Jawa", c1: "9C 1", c2: "9F 1", c3: "9C 2", c4: "9F 2" },
+                    { ruang: "R 4", mapel: "Bahasa Indonesia", c1: "9D 1", c2: "9A 1", c3: "9D 2", c4: "9A 2" },
+                    { ruang: "R 5", mapel: "Bahasa Indonesia", c1: "9E 1", c2: "9B 1", c3: "9E 2", c4: "9B 2" },
+                    { ruang: "R 6", mapel: "Bahasa Indonesia", c1: "9F 1", c2: "9C 1", c3: "9F 2", c4: "9C 2" }
+                ]
+            },
+            { 
+                hari: "Jum'at, 22 Mei 2026", color: "teal", 
+                sesi: ["07:20 - 08:10", "08:20 - 09:10", "09:20 - 10:10", "10:20 - 11:10"],
+                rows: [
+                    { ruang: "R 1", mapel: "Al-Qur'an", c1: "9A 1", c2: "9D 1", c3: "9A 2", c4: "9D 2" },
+                    { ruang: "R 2", mapel: "Al-Qur'an", c1: "9B 1", c2: "9E 1", c3: "9B 2", c4: "9E 2" },
+                    { ruang: "R 3", mapel: "Al-Qur'an", c1: "9C 1", c2: "9F 1", c3: "9C 2", c4: "9F 2" },
+                    { ruang: "R 4", mapel: "ICT Progul", c1: "9D 1", c2: "9A 1", c3: "9D 2", c4: "9A 2" },
+                    { ruang: "R 5", mapel: "ICT Progul", c1: "9E 1", c2: "9A 2", c3: "9E 2", c4: "9B 2" },
+                    { ruang: "R 6", mapel: "ICT Progul", c1: "9F 1", c2: "9A 3", c3: "9F 2", c4: "9C 2" }
+                ]
+            },
+            { 
+                hari: "Sabtu, 23 Mei 2026 (PJOK - Bleep Test)", color: "orange", 
+                sesi: ["07:30 - 09:00", "09:00 - 10:30", "-", "-"],
+                rows: [
+                    { ruang: "Lapbas", mapel: "Olahraga", c1: "9A", c2: "9B", c3: "-", c4: "-" },
+                    { ruang: "Lapbas", mapel: "Olahraga", c1: "9C", c2: "9D", c3: "-", c4: "-" },
+                    { ruang: "Lap. SMPI", mapel: "Olahraga", c1: "9E", c2: "9F", c3: "-", c4: "-" }
+                ]
+            }
+        ];
+
+        // ==================== DATA KELOMPOK (tetap sama) ====================
+        const dataKelompok = {
+            "9A 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Abqory Nararya Tyaswa Putra", "Abyan Hadiwijaya", "Al Fitto Abdurrahman"] },
+                { namaGrup: "Kelompok 2", anggota: ["Briega Afsar Arsenio Abdullah", "Abyan Rizq Adiguna", "Muhammad Akbar Alifiandra"] },
+                { namaGrup: "Kelompok 3", anggota: ["Ahmad Musthofa", "Ahnaf Zaki Maulana", "Muhammad Al Biruni Djatie"] },
+                { namaGrup: "Kelompok 4", anggota: ["Athaillah Ervino Suryanto Alfirdausi", "Attaya Jashenda Nugroho", "Faiz Jamil Ardhana Putra", "Muhammad Valent Putra Ardhani"] }
+            ],
+            "9A 2": [
+                { namaGrup: "Kelompok 5", anggota: ["Laksita Javas Kayana Arfiansah", "Muhammad Zakiy Zidane Nurrahman", "Muhammad Diego Rafa Naufal"] },
+                { namaGrup: "Kelompok 6", anggota: ["Khaifat Athallah Wibowo", "Galang Jalu Massendi", "Mazaya Zukhruf Dlaifulloh"] },
+                { namaGrup: "Kelompok 7", anggota: ["Hafiz Nealson Putra Denza", "Indra Winata", "Rafi Arga Saputra"] },
+                { namaGrup: "Kelompok 8", anggota: ["Bimo Mukti Sejati", "Meganza Fatheo Nitimanta", "Sandiaga", "Zulfa Zulfigar"] }
+            ],
+            "9B 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Ahmad Nayaka Rif'at Zakaria", "Akram Seno Adhi", "Dzaka Rizqi Aziyad"] },
+                { namaGrup: "Kelompok 2", anggota: ["Danendra Sholahudin Malik", "Dzaky Farrel Khalfani", "Raihan Zaky Al Faza"] },
+                { namaGrup: "Kelompok 3", anggota: ["Fadhil Pradana", "Firdaus Rahmat Arnol", "Muhammad Hanif Syafar Latief"] },
+                { namaGrup: "Kelompok 4", anggota: ["Al Ghifariel Prabhaswara", "Arjuan Nur Ihwan", "Arya Langit Ramadhan", "Musyaffa' Abdurrahman Hammam"] },
+                { namaGrup: "Kelompok 5", anggota: ["Altamis Wafiy Ahmad", "Arden Yudha Damara", "Maulana Faathir Al Bar", "Muhammad Alif Hakim"] }
+            ],
+            "9B 2": [
+                { namaGrup: "Kelompok 6", anggota: ["Avicena Ramadhan El Rumi", "Prabu Faiz Azam Permana", "Mohammad Azka Aflah"] },
+                { namaGrup: "Kelompok 7", anggota: ["Nabil Fawwaaz Raihan", "Sawung Dhimas Indra Jati", "Muhamad Fadhil Wibowo"] },
+                { namaGrup: "Kelompok 8", anggota: ["Muhammad Alif Alfurqon", "Nakhlah Fathan Ghaisan", "Rayhan Hafiid Abdillah"] },
+                { namaGrup: "Kelompok 9", anggota: ["Asyam Nafi' Mumtazy Ramadhan", "Ghavan Candra Perdana", "Aslam Abdurrohman Furqoni"] },
+                { namaGrup: "Kelompok 10", anggota: ["Ahsan Fatihuddin Fawwas Prabowo", "Rakan Bara Putra Ramadhan", "Raysha Arya Satya Naryama Gasa", "Dylan Albin Zaidaan"] }
+            ],
+            "9C 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Yudhistira Abrar Purwono", "Muzhaffar Faiq Abdillah", "Alakay Asmaul Fakiha"] },
+                { namaGrup: "Kelompok 2", anggota: ["Franklin Garrick Rafif Adhiarsa", "Thomi Eric Rahmadi", "Muhammad Velino", "Muhammad Rafasya Alvaro Alma"] },
+                { namaGrup: "Kelompok 3", anggota: ["Fatih Andira Putra", "Arfian Fadli Setiawan", "Fahreza Rafif Arkana"] },
+                { namaGrup: "Kelompok 4", anggota: ["Asyraf Putra Yusra", "Rihalulqalbi Popalia", "Vicky Harlan Aldiansyah", "Helmy Kotarou Putra Agustiyadi"] }
+            ],
+            "9C 2": [
+                { namaGrup: "Kelompok 5", anggota: ["Ahsan Rajendra Wibowo", "Fathan Aryasatya Wijaya", "Khalaf Faith Pradyatama", "Khairan Athaya Wibowo"] },
+                { namaGrup: "Kelompok 6", anggota: ["Ghavin Candra Paundra", "Ibrahim Khalilulloh", "Ivanza Amirul Yusuf"] },
+                { namaGrup: "Kelompok 7", anggota: ["Dzacky Hafidz Chandra Alzena", "Fakhri Ahza Seno Adin", "Zacky Raditya Perdana", "Isnan Arsyad Maulana Hebat"] },
+                { namaGrup: "Kelompok 8", anggota: ["Danish Marcello Alan Aristo", "Nuh Abdulbar", "Ferry Setiawan"] }
+            ],
+            "9D 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Ahmad Hamas Mubarak", "Hylmi Fathan Muzhoffar", "Fabian Arfa Putra", "Muhammad Zubair"] },
+                { namaGrup: "Kelompok 2", anggota: ["Akbar Mahendra Susanto", "Akbar Yusuf Ar Rantisi", "Ammar Zidan", "Anas Anugerah Illahi"] },
+                { namaGrup: "Kelompok 3", anggota: ["Arsakha Ghiffarramiro Nareswara", "Daffa Syauqillah Farasy Saefuddin", "Adzky Zubair Alkhoir"] },
+                { namaGrup: "Kelompok 4", anggota: ["Amirul Arif Arrosyid", "Azzam Kafi Rais", "Muhammad Ernesto Prabasena"] }
+            ],
+            "9D 2": [
+                { namaGrup: "Kelompok 5", anggota: ["Nuraga Jundi Alifathi", "Ray Husain Wijaya", "Muhammad Fathin Atsal Suryoko"] },
+                { namaGrup: "Kelompok 6", anggota: ["Alief Nur Firdauz Suseno", "Ziven Chrisandi Setya Putra", "Fathin Abdullah Attaqiy"] },
+                { namaGrup: "Kelompok 7", anggota: ["Bima Zuhdi Ni'amillah", "Athallah Fadhil Santoso", "Fadhil Haidar Anwar", "Faiz Nauval Fachriansyah"] },
+                { namaGrup: "Kelompok 8", anggota: ["Dayyan Aqmar Fitriansyah", "Safaraz Ishaq Al Raiz", "Brilian Zidan Farras", "Reiky Nafi Qatrunada"] }
+            ],
+            "9E 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Alisha Nursyifa", "Faiha Neysa Lubna Indarvy", "Filza Shaista Armanda", "Nafisah Jinan 'Ismah Mimosa"] },
+                { namaGrup: "Kelompok 2", anggota: ["Audrey Zhafira Nugroho", "Magdalena Callista Hilary", "Asha Reina Ghaisani"] },
+                { namaGrup: "Kelompok 3", anggota: ["Andi Nahda Athsilah", "Nadia Raihana", "Miftahul Khoiriyah Ramadhani"] },
+                { namaGrup: "Kelompok 4", anggota: ["Isma Azizah Hanafi", "Jenar Khalisa Sakhi", "Princess Cleo Samantha Kusuma", "Qaishara Humaira"] },
+                { namaGrup: "Kelompok 5", anggota: ["Putri Siti Amarra", "Radita Azka Justitia", "Qonita Qurrota A'yun Nurul Hanaa"] }
+            ],
+            "9E 2": [
+                { namaGrup: "Kelompok 6", anggota: ["Inas Alfathunnisa Azzahra", "Ashfa Muttaqina", "Anandita Zahra", "Nayyara Faraisa Silmi"] },
+                { namaGrup: "Kelompok 7", anggota: ["Amelya Nasya Putri", "Dinda Fatih Sahira", "Wilya Saka Akbar Agustia", "Shaabriyya Kirani Aamira Rizky"] },
+                { namaGrup: "Kelompok 8", anggota: ["Fadhila Amalia", "Fairuz Nawwar Fauziyah", "Wahida Nailiya Syifa"] },
+                { namaGrup: "Kelompok 9", anggota: ["Nayla Annashwa Adhiagsa", "Athaya Dhany Latifa", "Janeeta Aribah Zul Husni", "Queensha Khalila Ramadhani"] },
+                { namaGrup: "Kelompok 10", anggota: ["Arum Aufa Azizah", "Nasywa Aura Asyifa", "Tsaniya Hurin Mukhtar"] }
+            ],
+            "9F 1": [
+                { namaGrup: "Kelompok 1", anggota: ["Adzkia Nararya Paramudita", "Afifah Khoirunnisa", "Carrisa El Ghaniya F"] },
+                { namaGrup: "Kelompok 2", anggota: ["Arezti Hanan Hapsari", "Zivarra Githa Savitri", "Nabiela Fithria", "Keysha Bilqis Salsabila"] },
+                { namaGrup: "Kelompok 3", anggota: ["Aurora Hardira Daniswara", "Mufidati Aliya Keumala", "Nafeeza Naya Regina Kusuma"] },
+                { namaGrup: "Kelompok 4", anggota: ["Aina Shoumi Latifa", "Arsyabilla Putri Allifah", "Zivana Aurora Bintang Maharani"] },
+                { namaGrup: "Kelompok 5", anggota: ["Fidelia Belisya Kurniantoro", "Zahra Nadia Putri", "Syakira Amalia Farhani", "Nismara Kaniya Setiyono"] }
+            ],
+            "9F 2": [
+                { namaGrup: "Kelompok 6", anggota: ["Aliya Mumtaza", "Haifa Aqila Husnina", "Keysa Zafra Aqila"] },
+                { namaGrup: "Kelompok 7", anggota: ["Hasna Kamila Putri", "Nabila Talita Rafifah", "Nadhifa Zahra Cantika Putri", "Safira Eka Putri Meylani"] },
+                { namaGrup: "Kelompok 8", anggota: ["Nindika Violeta Miftahul Atha", "Morenza Davia Aulia Putri", "Tursina Fildza Qurro Tal'ain"] },
+                { namaGrup: "Kelompok 9", anggota: ["Attalea Chelsea Fahira", "Fatimah Az-Zahra Sutapa", "Niswah Mustaniiroh"] },
+                { namaGrup: "Kelompok 10", anggota: ["Azimah Khoirunnisa", "'Aisyah Mufidatul Yusra", "Amira Nayla Hafisa", "Azka Felicia Binar Velsignelse"] }
+            ]
+        };
+
+        // ==================== DATA PANDUAN (ICT Progul & Non Progul dipisah) ====================
+        const dataPanduan = [
+            { id: "ipa", mapel: "Ilmu Pengetahuan Alam", bentuk: "Individu", alat: "Paku besi (1), klip kertas 10, Baterai AA 1.5V", tema: "Asam-Basa & Kemagnetan", ket: "Identifikasi pH larutan. Membuat magnet 3 cara (gosok, induksi, elektromagnetik). Bandingkan kekuatan gaya magnet.", aspek: "Keterampilan eksperimen, pengisian data, keselamatan kerja." },
+            { id: "ips", mapel: "Ilmu Pengetahuan Sosial", bentuk: "Individu", alat: "ATK", tema: "Materi Terintegrasi", ket: "9 soal analisis: kasus kemacetan/banjir, peta mineral, analisis data wilayah, mobilitas sosial, produk impor dll.", aspek: "Analisis kritis, pemahaman konsep." },
+            { id: "mtk", mapel: "Matematika", bentuk: "Kelompok", alat: "Penggaris, meteran baju (Tanpa Kalkulator)", tema: "Statistika Nyata", ket: "Survei 15 data (tinggi, tidur dll). Hitung mean, median, modus, Q1,Q2,Q3, IQR. Diagram batang + presentasi.", aspek: "Data valid, perhitungan tepat, grafik, presentasi." },
+            { id: "ife", mapel: "IFE (PAI)", bentuk: "Kelompok", alat: "Kain kafan (guru)", tema: "Mengafani & Mensholatkan Jenazah", ket: "Praktik mengkafani dan sholat jenazah (takbir 1-4, salam). Durasi 10-15 menit.", aspek: "Kerapian, kekompakan, bacaan takbir, tertib." },
+            { id: "eng", mapel: "Bahasa Inggris", bentuk: "Individu/Kelompok", alat: "-", tema: "Personal Introduction & Recount", ket: "Presentasi diri (karakter, hobi) dan cerita memorable moments dengan struktur recount.", aspek: "Fluency, confidence, grammar past tense, content." },
+            { id: "civic", mapel: "Pendidikan Pancasila", bentuk: "Kelompok", alat: "Peralatan masak tradisional", tema: "Melestarikan Tradisi Nusantara", ket: "Memasak menu tradisional (makanan/minuman khas daerah).", aspek: "Kekompakan, keotentikan, plating, cita rasa." },
+            { id: "jawa", mapel: "Bahasa Jawa", bentuk: "Individu", alat: "ATK", tema: "Basa Krama & Aksara Jawa", ket: "Perkenalan diri basa krama (tanpa teks). Membaca aksara Jawa acak.", aspek: "Krama alus, kelancaran, ketepatan aksara." },
+            { id: "indo", mapel: "Bahasa Indonesia", bentuk: "Kelompok", alat: "Catatan pendukung", tema: "Debat (8 topik)", ket: "Debat pro vs kontra (ponsel di sekolah, AI, dll). Durasi maks 10 menit.", aspek: "Kerja sama tim, argumen, sanggahan, santun." },
+            { id: "quran", mapel: "Al-Qur'an", bentuk: "Individu", alat: "-", tema: "Makharijul Huruf & Mad", ket: "Undian ayat. Membaca dan menerangkan makhraj serta hukum mad. Skor awal 100.", aspek: "Ketepatan makhraj & hukum mad." },
+            { id: "ict_progul", mapel: "ICT Progul (Construct 3)", bentuk: "Individu", alat: "Link asset & laptop", tema: "Game Development (Construct 3)", ket: "Buat game interaktif dengan tema yang diundi (Tangkap Buah, Quiz Interaktif, Klik Target, Zombie Escape, Ambil Koin). Waktu 50 menit. Aset disediakan penguji.", aspek: "Event & Logika, Gameplay, Tampilan, Kreativitas." },
+            { id: "ict_non", mapel: "ICT Non Progul (Scratch)", bentuk: "Individu", alat: "Link asset & laptop", tema: "Game Development (Scratch)", ket: "Buat game menggunakan Scratch dengan tema (Tangkap Buah, Quiz Interaktif, Klik Target, Zombie Escape, Ambil Koin). Waktu 50 menit.", aspek: "Event & Logika, Gameplay, Tampilan, Kreativitas." },
+            { id: "sport", mapel: "PJOK", bentuk: "Individu", alat: "Sepatu (opsional)", tema: "Bleep Test (VO2max)", ket: "Lari bolak-balik 20m. Berhenti jika 2x gagal capai garis.", aspek: "Level & shuttle terakhir." }
+        ];
+
+        // ==================== RENDER FUNCTIONS ====================
+        function renderJadwal() {
+            const container = document.getElementById('jadwal-container');
+            if(!container) return;
+            container.innerHTML = dataJadwal.map(day => `
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mb-6">
+                    <div class="bg-slate-50 px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+                        <h4 class="font-bold text-slate-800"><i class="fas fa-calendar-day mr-2 text-${day.color}-500"></i> ${day.hari}</h4>
+                        <span class="text-xs text-slate-400">${day.sesi[0]} – ${day.sesi[3] !== '-' ? day.sesi[3] : day.sesi[1]}</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm whitespace-nowrap">
+                            <thead class="text-slate-400 bg-slate-50/50">
+                                <tr>
+                                    <th class="px-5 py-3 font-semibold">Ruang</th>
+                                    <th class="px-5 py-3 font-semibold">Mapel</th>
+                                    ${day.sesi.map(s => `<th class="px-5 py-3 font-semibold">${s}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                ${day.rows.map(r => `
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-5 py-3 font-medium text-slate-500">${r.ruang}</td>
+                                        <td class="px-5 py-3 font-extrabold text-${day.color}-600">${r.mapel}</td>
+                                        <td class="px-5 py-3 text-slate-600">${r.c1}</td>
+                                        <td class="px-5 py-3 text-slate-600">${r.c2}</td>
+                                        <td class="px-5 py-3 text-slate-600">${r.c3}</td>
+                                        <td class="px-5 py-3 text-slate-600">${r.c4}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`).join('');
+        }
+
+        function renderMenuKelas() {
+            const container = document.getElementById('filter-kelas-container');
+            if(!container) return;
+            const kelasList = Object.keys(dataKelompok);
+            container.innerHTML = kelasList.map((k, index) => `<button onclick="pilihKelas('${k}')" class="btn-kelas whitespace-nowrap px-5 py-2 rounded-full text-sm font-bold border transition ${index === 0 ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300'}">${k}</button>`).join('');
+            pilihKelas(kelasList[0]);
+        }
+
+        function pilihKelas(kelasId) {
+            document.querySelectorAll('.btn-kelas').forEach(btn => {
+                btn.className = "btn-kelas whitespace-nowrap px-5 py-2 rounded-full text-sm font-bold border transition bg-white text-slate-500 border-slate-200 hover:border-blue-300";
+                if(btn.innerText === kelasId) btn.className = "btn-kelas whitespace-nowrap px-5 py-2 rounded-full text-sm font-bold border transition bg-blue-600 text-white border-blue-600 shadow-md";
+            });
+            const container = document.getElementById('grid-kelompok');
+            if(!container) return;
+            container.innerHTML = dataKelompok[kelasId].map(grup => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 group-card relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full -z-0"></div>
+                    <h4 class="font-extrabold text-blue-600 text-xs uppercase tracking-widest mb-4 flex items-center relative z-10"><i class="fas fa-users mr-2"></i> ${grup.namaGrup}</h4>
+                    <ul class="space-y-3 relative z-10">
+                        ${grup.anggota.map(nama => `<li class="flex items-start text-sm font-medium text-slate-600"><div class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 mr-3 shrink-0"></div><span class="nama-siswa leading-tight">${nama}</span></li>`).join('')}
+                    </ul>
+                </div>`).join('');
+            cariSiswa();
+        }
+
+        function cariSiswa() {
+            const input = document.getElementById('searchBox')?.value.toLowerCase() || '';
+            document.querySelectorAll('.group-card').forEach(card => {
+                let cardTampil = false;
+                card.querySelectorAll('li').forEach(li => {
+                    const nama = li.querySelector('.nama-siswa')?.innerText.toLowerCase() || '';
+                    if(nama.includes(input)) { li.style.opacity = '1'; li.querySelector('.w-2')?.classList.replace('bg-blue-400', 'bg-emerald-500'); cardTampil = true; } 
+                    else { li.style.opacity = '0.3'; li.querySelector('.w-2')?.classList.replace('bg-emerald-500', 'bg-blue-400'); }
+                });
+                card.style.display = cardTampil || input === '' ? 'block' : 'none';
+            });
+        }
+
+        function renderPanduan() {
+            const container = document.getElementById('panduan-container');
+            if(!container) return;
+            const gradientColors = ["from-cyan-400 to-blue-600","from-orange-400 to-red-500","from-purple-400 to-indigo-600","from-emerald-500 to-green-700","from-pink-400 to-rose-500","from-red-400 to-red-600","from-amber-500 to-orange-600","from-sky-400 to-blue-600","from-teal-400 to-emerald-600","from-slate-600 to-slate-800","from-fuchsia-500 to-purple-600","from-yellow-400 to-orange-500"];
+            const iconMap = { ipa:"fa-flask", ips:"fa-globe", mtk:"fa-chart-simple", ife:"fa-hands-praying", eng:"fa-language", civic:"fa-flag", jawa:"fa-feather", indo:"fa-comments", quran:"fa-book-quran", ict_progul:"fa-cube", ict_non:"fa-puzzle-piece", sport:"fa-heartbeat" };
+            
+            container.innerHTML = dataPanduan.map((p, idx) => {
+                let icon = iconMap[p.id] || "fa-book";
+                return `
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition overflow-hidden group flex flex-col h-full">
+                    <div class="h-36 w-full relative overflow-hidden bg-gradient-to-br ${gradientColors[idx % gradientColors.length]} flex items-center justify-center">
+                        <i class="fas ${icon} text-6xl text-white/90 drop-shadow-md"></i>
+                        <div class="absolute top-3 right-3 z-20"><span class="text-[10px] font-bold bg-white/90 backdrop-blur text-slate-800 px-3 py-1.5 rounded-full uppercase shadow-sm">${p.bentuk}</span></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-extrabold text-xl text-slate-800 mb-1">${p.mapel}</h3>
+                        <p class="text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border-b border-slate-100 pb-3">${p.tema}</p>
+                        <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-4 flex-grow"><p class="text-[10px] font-bold text-slate-500 uppercase mb-1"><i class="fas fa-clipboard-list mr-1"></i> Deskripsi Tugas</p><p class="text-xs text-slate-700 leading-relaxed font-medium">${p.ket}</p></div>
+                        <div class="bg-amber-50 border border-amber-100 rounded-xl p-3"><p class="text-[10px] font-bold text-amber-800 uppercase mb-1"><i class="fas fa-box-open mr-1"></i> Persiapan Alat/Bahan</p><p class="text-xs text-amber-700 font-medium">${p.alat}</p></div>
+                        ${p.aspek ? `<div class="mt-3 text-[10px] text-slate-400 border-t pt-2"><i class="fas fa-star-of-life text-[9px] mr-1"></i> Aspek: ${p.aspek}</div>` : ''}
+                    </div>
+                </div>`}).join('');
+        }
+
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => { b.classList.remove('text-blue-600'); b.classList.add('text-slate-400'); });
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.remove('text-slate-400');
+            document.getElementById('btn-' + tabId).classList.add('text-blue-600');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        window.onload = () => { renderJadwal(); renderMenuKelas(); renderPanduan(); }
+    </script>
+</body>
+</html>
+```
